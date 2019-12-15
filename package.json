@@ -1,8 +1,8 @@
 {
   "name": "crawler",
   "version": "1.0.0",
-  "description": "",
-  "main": "house_crawler.js",
+  "description": "爬虫",
+  "main": "build/house/index.js",
   "scripts": {
     "dev": "tsc -w",
     "build": "rm -r build&& tsc"
