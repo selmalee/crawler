@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("../../config/index");
 const email_1 = require("../lib/email");
+const config_1 = require("../config");
 let sendData = [];
 let timeout;
 /**
@@ -28,7 +28,7 @@ exports.showData = (data, keywords) => {
             }
             catch (e) {
             }
-        }), index_1.SEND_TIMEOUT);
+        }), config_1.default.SEND_TIME);
     }
     else {
         console.log('no data');

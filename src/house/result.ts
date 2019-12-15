@@ -1,5 +1,5 @@
-import { SEND_TIMEOUT } from '../../config/index';
 import { sendMail } from '../lib/email';
+import CONFIG from '../config'
 
 let sendData = []
 let timeout
@@ -19,7 +19,7 @@ export const showData = (data: any[], keywords: RegExp) => {
       } catch(e) {
 
       }
-    }, SEND_TIMEOUT);
+    }, CONFIG.SEND_TIME);
   } else {
     console.log('no data')
   }
