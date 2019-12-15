@@ -1,14 +1,16 @@
 import { eachPageCrawler } from '../lib/crawler'
 import { getFilterData } from './filter';
 import { showData } from './result';
+import { CRAWLER_TIME, EMAIL_TIME } from '../../config/index'
 
-const INTERVAL_TIME = 1000 // 分页请求的时间间隔
-const CRAWLER_TIME = 60000 // 爬取的时间间隔
 const baseUrl = 'https://www.douban.com/group/106955/discussion?start=';
+const paramValues = [0, 25, 50] // 与baseUrl拼接的参数，这里是爬取页数
+
+const INTERVAL_TIME = paramValues && paramValues.length > 0 ? Math.round(EMAIL_TIME / paramValues.length) : 60000 // 分页请求的时间间隔
+
 // const keywords = /一室|独卫/ // 关键词
 const keywords = /(南山|桃园|大新|新安).*(两房|两室|2房)/ // 关键词
 const startTime = new Date().getTime() - CRAWLER_TIME // 开始时间
-const paramValues = [0, 25, 50, 75, 100] // 与baseUrl拼接的参数，这里是爬取页数
 
 // 主函数
 // 单次请求
