@@ -1,0 +1,28 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "house_crawler.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "rm -r build&& tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seminelee/crawler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seminelee/crawler/issues"
+  },
+  "homepage": "https://github.com/seminelee/crawler#readme",
+  "devDependencies": {
+    "@types/node": "^12.12.17",
+    "typescript": "^3.7.3"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "nodemailer": "^6.4.2"
+  }
+}
