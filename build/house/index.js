@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const crawler_1 = require("../lib/crawler");
 const filter_1 = require("./filter");
 const result_1 = require("./result");
-const INTERVAL_TIME = 1000; // 分页请求的时间间隔
-const CRAWLER_TIME = 60000; // 爬取的时间间隔
+const index_1 = require("../../config/index");
 const baseUrl = 'https://www.douban.com/group/106955/discussion?start=';
+const paramValues = [0, 25, 50]; // 与baseUrl拼接的参数，这里是爬取页数
+const INTERVAL_TIME = paramValues && paramValues.length > 0 ? Math.round(index_1.EMAIL_TIME / paramValues.length) : 60000; // 分页请求的时间间隔
 // const keywords = /一室|独卫/ // 关键词
 const keywords = /(南山|桃园|大新|新安).*(两房|两室|2房)/; // 关键词
-const startTime = new Date().getTime() - CRAWLER_TIME; // 开始时间
-const paramValues = [0, 25, 50, 75, 100]; // 与baseUrl拼接的参数，这里是爬取页数
+const startTime = new Date().getTime() - index_1.CRAWLER_TIME; // 开始时间
 // 主函数
 // 单次请求
 const eachPageCrawl = (url) => {
@@ -61,4 +61,4 @@ setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
     catch (e) {
         console.log('crawler error: ' + e.toString());
     }
-}), CRAWLER_TIME);
+}), index_1.CRAWLER_TIME);

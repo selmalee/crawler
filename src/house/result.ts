@@ -21,6 +21,6 @@ export const showData = (data: any[], keywords: RegExp) => {
       }
     }, SEND_TIMEOUT);
   } else {
-    // console.log('no data')
+    console.log('no data')
   }
 }

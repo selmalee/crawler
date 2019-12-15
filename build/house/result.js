@@ -1,7 +1,16 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const nodemailer = require("nodemailer");
-const SEND_TIMEOUT = 360000 * 0.5;
+const index_1 = require("../../config/index");
+const email_1 = require("../lib/email");
 let sendData = [];
 let timeout;
 /**
@@ -12,41 +21,16 @@ exports.showData = (data, keywords) => {
     if (data.length > 0) {
         sendData = sendData.concat(data);
         timeout && clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            sendMail(sendData, keywords);
-        }, SEND_TIMEOUT);
+        timeout = setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                yield email_1.sendMail(sendData, keywords);
+                sendData = [];
+            }
+            catch (e) {
+            }
+        }), index_1.SEND_TIMEOUT);
     }
     else {
-        // console.log('no data')
+        console.log('no data');
     }
-};
-/**
- * 发送邮件
- * @param {any[]} data
- * @param {string} keywords
- */
-const sendMail = (data, keywords) => {
-    const mailTransport = nodemailer.createTransport({
-        service: 'qq',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASS //授权码,通过QQ获取
-        }
-    });
-    const options = {
-        from: process.env.EMAIL,
-        to: process.env.EMAIL,
-        subject: '豆瓣租房爬取结果',
-        text: '关键词：' + keywords.toString() + '\n\n - ' + data.map(item => JSON.stringify(item)).join('\n - '),
-    };
-    mailTransport.sendMail(options, function (err, msg) {
-        if (err) {
-            console.error('send mail error: ' + err.toString());
-            console.log(data);
-        }
-        else {
-            sendData = [];
-            console.log(msg.response);
-        }
-    });
 };
