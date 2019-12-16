@@ -44,13 +44,13 @@ const crawler = function () {
         }
         // 每隔一段时间请求一次，以防被封ip
         yield promises[index]();
-        index++;
         const inter = setInterval(() => __awaiter(this, void 0, void 0, function* () {
-            yield promises[index]();
             index++;
             if (index === promises.length) {
                 clearInterval(inter);
+                return;
             }
+            yield promises[index]();
         }), INTERVAL_TIME);
     });
 };

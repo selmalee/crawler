@@ -35,13 +35,13 @@ const crawler = async function () {
   }
   // 每隔一段时间请求一次，以防被封ip
   await promises[index]()
-  index++
   const inter = setInterval(async () => {
-    await promises[index]()
     index++
     if (index === promises.length) {
       clearInterval(inter)
+      return
     }
+    await promises[index]()
   }, INTERVAL_TIME)
 }
 // 每隔一段时间爬取一次
