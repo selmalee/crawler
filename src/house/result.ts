@@ -17,7 +17,7 @@ export const showData = (data: any[], keywords: RegExp) => {
         const subject = '【豆瓣租房】' + data[0].text
         const text = ' - ' + data.map(item => JSON.stringify(item)).join('\n - ') + '\n\n关键词：' + keywords.toString()
         const res = await sendMail(sendData, subject, text)
-        console.error(`[${new Date().toLocaleString()}] ${res}`)
+        console.log(`[${new Date().toLocaleString()}] ${res}`)
         sendData = []
       } catch(e) {
         console.error(`[${new Date().toLocaleString()}] send mail error: ${e.toString()}`)
