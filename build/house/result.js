@@ -23,14 +23,16 @@ exports.showData = (data, keywords) => {
         timeout && clearTimeout(timeout);
         timeout = setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                yield email_1.sendMail(sendData, keywords);
+                const res = yield email_1.sendMail(sendData, keywords);
+                console.error(`[${new Date().toLocaleString()}] ${res}`);
                 sendData = [];
             }
             catch (e) {
+                console.error(`[${new Date().toLocaleString()}] send mail error: ${e.toString()}`);
             }
         }), config_1.default.SEND_TIME);
     }
     else {
-        console.log('no data');
+        console.log(`[${new Date().toLocaleString()}] no data`);
     }
 };

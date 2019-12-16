@@ -23,7 +23,6 @@ exports.sendMail = (data, keywords) => {
     return new Promise((resolve, reject) => {
         mailTransport.sendMail(options, function (err, msg) {
             if (err) {
-                console.error('send mail error: ' + err.toString());
                 reject(err);
             }
             else {

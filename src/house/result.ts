@@ -14,13 +14,14 @@ export const showData = (data: any[], keywords: RegExp) => {
     timeout && clearTimeout(timeout)
     timeout = setTimeout(async () => {
       try {
-        await sendMail(sendData, keywords)
+        const res = await sendMail(sendData, keywords)
+        console.error(`[${new Date().toLocaleString()}] ${res}`)
         sendData = []
       } catch(e) {
-
+        console.error(`[${new Date().toLocaleString()}] send mail error: ${e.toString()}`)
       }
     }, CONFIG.SEND_TIME);
   } else {
-    console.log('no data')
+    console.log(`[${new Date().toLocaleString()}] no data`)
   }
 }

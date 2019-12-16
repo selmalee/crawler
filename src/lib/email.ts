@@ -23,7 +23,6 @@ export const sendMail = (data: any[], keywords: RegExp) => {
   return new Promise((resolve, reject) => {
     mailTransport.sendMail(options, function(err, msg){
       if (err) {
-        console.error('send mail error: ' + err.toString())
         reject(err)
       } else {
         resolve(msg.response)
