@@ -4,7 +4,7 @@ import { showData } from './result';
 import CONFIG from '../config'
 
 const baseUrl = 'https://www.douban.com/group/106955/discussion?start=';
-const paramValues = [0, 25, 50] // 与baseUrl拼接的参数，这里是爬取页数
+const paramValues = [0, 25] // 与baseUrl拼接的参数，这里是爬取页数
 
 const INTERVAL_TIME = paramValues && paramValues.length > 0 ? Math.round(CONFIG.SEND_TIME / paramValues.length) : 60000 // 分页请求的时间间隔
 
