@@ -4,12 +4,12 @@ import { showData } from './result';
 import CONFIG from '../config'
 
 const baseUrl = 'https://www.douban.com/group/106955/discussion?start=';
-const paramValues = [0, 25] // 与baseUrl拼接的参数，这里是爬取页数
+const paramValues = [0, 25, 50] // 与baseUrl拼接的参数，这里是爬取页数
 
 const INTERVAL_TIME = paramValues && paramValues.length > 0 ? Math.round(CONFIG.SEND_TIME / paramValues.length) : 60000 // 分页请求的时间间隔
 
 // const keywords = /一室|独卫/ // 关键词
-const keywords = /(南山|桃园|大新|新安|宝体|阳光粤海|翡翠明珠).*(两房|两室|2房|复式)/ // 关键词
+const keywords = /(南山|桃园|大新|新安|宝体|宝安中心|阳光粤海|翡翠明珠).*(两房|两室|2房|复式)/ // 关键词
 const startTime = new Date().getTime() - CONFIG.CRAWLER_TIME // 开始时间
 
 // 主函数
