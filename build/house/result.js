@@ -23,7 +23,9 @@ exports.showData = (data, keywords) => {
         timeout && clearTimeout(timeout);
         timeout = setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                const res = yield email_1.sendMail(sendData, keywords);
+                const subject = '【豆瓣租房】' + data[0].text;
+                const text = ' - ' + data.map(item => JSON.stringify(item)).join('\n - ') + '\n\n关键词：' + keywords.toString();
+                const res = yield email_1.sendMail(sendData, subject, text);
                 console.error(`[${new Date().toLocaleString()}] ${res}`);
                 sendData = [];
             }

@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
  * @param {any[]} data
  * @param {string} keywords
  */
-exports.sendMail = (data, keywords) => {
+exports.sendMail = (data, subject, text) => {
     const mailTransport = nodemailer.createTransport({
         service: 'qq',
         auth: {
@@ -17,8 +17,8 @@ exports.sendMail = (data, keywords) => {
     const options = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
-        subject: '豆瓣租房爬取结果',
-        text: '关键词：' + keywords.toString() + '\n\n - ' + data.map(item => JSON.stringify(item)).join('\n - '),
+        subject,
+        text,
     };
     return new Promise((resolve, reject) => {
         mailTransport.sendMail(options, function (err, msg) {

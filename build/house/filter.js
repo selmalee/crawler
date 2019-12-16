@@ -38,8 +38,8 @@ exports.getFilterData = (html, keywords, startTime) => {
         const a = $(ele).find('a');
         const time = $(ele).nextAll('.time');
         return {
-            href: a.attr('href'),
             text: a.text().trim(),
+            href: a.attr('href'),
             time: time.html()
         };
     })

@@ -38,8 +38,8 @@ export const getFilterData = (html: string, keywords: RegExp, startTime: Date) =
       const a = $(ele).find('a')
       const time = $(ele).nextAll('.time')
       return {
-        href: a.attr('href'),
         text: a.text().trim(),
+        href: a.attr('href'),
         time: time.html()
       }
     })
