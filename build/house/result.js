@@ -19,14 +19,15 @@ let timeout;
  */
 exports.showData = (data, keywords) => {
     if (data.length > 0) {
+        console.log(`[${new Date().toLocaleString()}] ${data.length}条记录`);
         sendData = sendData.concat(data);
         timeout && clearTimeout(timeout);
         timeout = setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                const subject = '【豆瓣租房】' + data[0].text;
+                const subject = '【豆瓣租房】' + data.length + '条';
                 const text = ' - ' + data.map(item => JSON.stringify(item)).join('\n - ') + '\n\n关键词：' + keywords.toString();
                 const res = yield email_1.sendMail(sendData, subject, text);
-                console.log(`[${new Date().toLocaleString()}] ${res}`);
+                console.log(`[${new Date().toLocaleString()}] send mail ${res}`);
                 sendData = [];
             }
             catch (e) {
