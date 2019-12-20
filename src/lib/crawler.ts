@@ -22,6 +22,7 @@ export const eachPageCrawler = (url: string) => {
   }
   return new Promise((resolve,reject) => {
     const req = requestFn(options, (res) => {
+      console.log(url + ' status: ' + res.statusCode)
       var html = '';
       if (res.statusCode !== 200) {
         res.resume() // 消费响应数据来释放内存。

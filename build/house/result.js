@@ -11,31 +11,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const email_1 = require("../lib/email");
 const config_1 = require("../config");
-let sendData = [];
-let timeout;
+let storageData = {};
+// 定期清理缓存数据
+setInterval(() => {
+    storageData = {};
+}, config_1.STORAGE_TIME);
 /**
  * 展示爬取数据
  * @param {any[]} data
  */
-exports.showData = (data, keywords) => {
+exports.showData = (data, keywords) => __awaiter(void 0, void 0, void 0, function* () {
+    // 筛选不在缓存中
+    data = data.filter(item => !storageData[item.text]);
+    // 如果有数据
     if (data.length > 0) {
         console.log(`[${new Date().toLocaleString()}] ${data.length}条记录`);
-        sendData = sendData.concat(data);
-        timeout && clearTimeout(timeout);
-        timeout = setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
-            try {
-                const subject = '【豆瓣租房】' + data.length + '条';
-                const text = ' - ' + data.map(item => JSON.stringify(item)).join('\n - ') + '\n\n关键词：' + keywords.toString();
-                const res = yield email_1.sendMail(sendData, subject, text);
-                console.log(`[${new Date().toLocaleString()}] send mail ${res}`);
-                sendData = [];
-            }
-            catch (e) {
-                console.error(`[${new Date().toLocaleString()}] send mail error: ${e.toString()}`);
-            }
-        }), config_1.default.SEND_TIME);
+        // 缓存数据
+        data.forEach(item => {
+            storageData[item.text] = true;
+        });
+        // 凌晨到7点别发邮件了
+        if (new Date().getHours() < 7) {
+            return;
+        }
+        // 防抖函数，延时发送邮件
+        try {
+            const subject = '【豆瓣租房】' + data.length + '条';
+            const text = ' - ' + data.map(item => JSON.stringify(item)).join('\n - ') + '\n\n关键词：' + keywords.toString();
+            const res = yield email_1.sendMail(data, subject, text);
+            console.log(`[${new Date().toLocaleString()}] send mail ${res}`);
+        }
+        catch (e) {
+            console.error(`[${new Date().toLocaleString()}] send mail error: ${e.toString()}`);
+        }
     }
     else {
         console.log(`[${new Date().toLocaleString()}] no data`);
     }
-};
+});
