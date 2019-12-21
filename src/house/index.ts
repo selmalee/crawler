@@ -4,7 +4,7 @@ import { showData } from './result';
 import { CRAWLER_TIME } from '../config'
 
 const baseUrl = 'https://www.douban.com/group/';
-const paramValues = ['106955/discussion?start=0', '106955/discussion?start=25', 'szsh/discussion?start=0', 'szsh/discussion?start=25', 'nanshanzufang/discussion?start=0', 'nanshanzufang/discussion?start=25', 'baoanzufang/discussion?start=0', 'baoanzufang/discussion?start=25'] // 与baseUrl拼接的参数，这里是爬取页数
+const paramValues = ['106955/discussion?start=0', '106955/discussion?start=25', '106955/discussion?start=50', 'szsh/discussion?start=0', 'szsh/discussion?start=25', 'szsh/discussion?start=50', 'nanshanzufang/discussion?start=0', 'nanshanzufang/discussion?start=25', 'nanshanzufang/discussion?start=50', 'baoanzufang/discussion?start=0', 'baoanzufang/discussion?start=25', 'baoanzufang/discussion?start=50'] // 与baseUrl拼接的参数，这里是爬取页数
 
 const INTERVAL_TIME = paramValues && paramValues.length > 0 ? Math.floor(CRAWLER_TIME / paramValues.length) : 60000 // 分页请求的时间间隔
 
