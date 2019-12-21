@@ -14,14 +14,18 @@ setInterval(() => {
  */
 export const showData = async (data: any[], keywords: RegExp) => {
   // 筛选不在缓存中
-  data = data.filter(item => !storageDataHash[item.text])
+  data = data.filter(item => {
+    if (storageDataHash[item.text]) {
+      return false
+    } else {
+      storageDataHash[item.text] = true
+      return true
+    }
+  })
   // 如果有数据
   if (data.length > 0) {
     console.log(`[${new Date().toLocaleString()}] ${data.length}条记录`)
     // 缓存数据
-    data.forEach(item => {
-      storageDataHash[item.text] = true
-    })
     storageData = storageData.concat(data)
     // 凌晨到7点别发邮件了
     if (new Date().getHours() < 7) {
