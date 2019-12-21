@@ -14,7 +14,7 @@ const filter_1 = require("./filter");
 const result_1 = require("./result");
 const config_1 = require("../config");
 const baseUrl = 'https://www.douban.com/group/';
-const paramValues = ['106955/discussion?start=0', '106955/discussion?start=25', 'szsh/discussion?start=0', 'szsh/discussion?start=25', 'nanshanzufang/discussion?start=0', 'nanshanzufang/discussion?start=25', 'baoanzufang/discussion?start=0', 'baoanzufang/discussion?start=25']; // 与baseUrl拼接的参数，这里是爬取页数
+const paramValues = ['106955/discussion?start=0', '106955/discussion?start=25', '106955/discussion?start=50', 'szsh/discussion?start=0', 'szsh/discussion?start=25', 'szsh/discussion?start=50', 'nanshanzufang/discussion?start=0', 'nanshanzufang/discussion?start=25', 'nanshanzufang/discussion?start=50', 'baoanzufang/discussion?start=0', 'baoanzufang/discussion?start=25', 'baoanzufang/discussion?start=50']; // 与baseUrl拼接的参数，这里是爬取页数
 const INTERVAL_TIME = paramValues && paramValues.length > 0 ? Math.floor(config_1.CRAWLER_TIME / paramValues.length) : 60000; // 分页请求的时间间隔
 const keywords = /(深大|桃园|大新|宝安中心|宝体|凯旋城|阳光粤海|翡翠明珠|君逸世家|友邻公寓|花样年花).*(两房|两室|2房|复式)/; // 关键词
 const startTime = new Date().getTime() - config_1.CRAWLER_TIME; // 开始时间
