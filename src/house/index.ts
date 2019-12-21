@@ -8,8 +8,7 @@ const paramValues = ['106955/discussion?start=0', '106955/discussion?start=25', 
 
 const INTERVAL_TIME = paramValues && paramValues.length > 0 ? Math.floor(CRAWLER_TIME / paramValues.length) : 60000 // 分页请求的时间间隔
 
-// const keywords = /一室|独卫/ // 关键词
-const keywords = /(深大|桃园|大新|宝安中心|宝体|凯旋城|阳光粤海|翡翠明珠|君逸世家).*(两房|两室|2房|复式)/ // 关键词
+const keywords = /(深大|桃园|大新|宝安中心|宝体|凯旋城|阳光粤海|翡翠明珠|君逸世家|友邻公寓|花样年花).*(两房|两室|2房|复式)/ // 关键词
 const startTime = new Date().getTime() - CRAWLER_TIME // 开始时间
 
 // 主函数
