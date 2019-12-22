@@ -2,8 +2,6 @@ import { sendMail } from '../lib/email'
 import { STORAGE_TIME } from '../config'
 import * as crypto from 'crypto'
 
-const md5 = crypto.createHash('md5')
-
 let storageDataHash = {}
 let storageData = []
 // 定期清理缓存数据
@@ -18,6 +16,7 @@ setInterval(() => {
 export const showData = async (data: any[], keywords: RegExp) => {
   // 筛选不在缓存中
   data = data.filter(item => {
+    const md5 = crypto.createHash('md5')
     const id = md5.update(item.href).digest('hex')
     if (storageDataHash[id]) {
       return false
