@@ -11,6 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const email_1 = require("../lib/email");
 const config_1 = require("../config");
+const crypto = require("crypto");
+const md5 = crypto.createHash('md5');
+console.log(md5.update('翡翠明珠，-：v ...').digest('hex'));
 let storageDataHash = {};
 let storageData = [];
 // 定期清理缓存数据
@@ -24,11 +27,12 @@ setInterval(() => {
 exports.showData = (data, keywords) => __awaiter(void 0, void 0, void 0, function* () {
     // 筛选不在缓存中
     data = data.filter(item => {
-        if (storageDataHash[item.text]) {
+        const id = md5.update(item.href).digest('hex');
+        if (storageDataHash[id]) {
             return false;
         }
         else {
-            storageDataHash[item.text] = true;
+            storageDataHash[id] = true;
             return true;
         }
     });
