@@ -26,7 +26,7 @@ exports.showData = (data, keywords) => __awaiter(void 0, void 0, void 0, functio
     // 筛选不在缓存中
     data = data.filter(item => {
         const md5 = crypto.createHash('md5');
-        const id = md5.update(item.href).digest('hex');
+        const id = md5.update(item.text).digest('hex');
         if (storageDataHash[id]) {
             return false;
         }
